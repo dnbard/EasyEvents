@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <script src="../src/easyevents.js"></script>
+    <script>
+        var token = EasyEvents.subscribe('event', function(event, data){
+            console.log(new Date() + ' Event with name "' + event + '" triggered');
+        });
+
+        EasyEvents.publish('event');
+
+        EasyEvents.remove(token);
+        EasyEvents.publish('event');
+
+        token = EasyEvents.subscribe('event', function(event, data){
+            console.log(new Date() + ' Timer with name "' + event + '" triggered');
+        });
+
+        setInterval(function(){
+            EasyEvents.publish('event');
+        }, 1000);
+
+        setTimeout(function(){
+            EasyEvents.remove('event');
+            console.log(new Date() + ' All events removed');
+        }, 10000);
+    </script>
+</body>
+</html>
