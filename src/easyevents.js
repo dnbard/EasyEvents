@@ -1,9 +1,5 @@
 var events = { };
 
-var strContains = function(what, where) {
-    return ''.indexOf.call(what, where, 0) !== -1;
-};
-
 var s4 = function() {
     return Math.floor((1 + Math.random()) * 0x10000)
         .toString(16)
@@ -13,7 +9,7 @@ var s4 = function() {
 var guid = function() {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
-}
+};
 
 var addEvent = function(eventName, event){
     var id = guid();
@@ -26,7 +22,7 @@ var addEvent = function(eventName, event){
         events[eventName][id] = event;
     }
     return token;
-}
+};
 
 var trigger = function(eventName, data){
     var triggerEvents = events[eventName];
@@ -37,7 +33,7 @@ var trigger = function(eventName, data){
             triggerEvent(eventName, data);
         }
     }
-}
+};
 
 var removeEvent = function(eventData){
     var args = eventData.split('::');
@@ -53,21 +49,21 @@ var removeEvent = function(eventData){
             delete eventTriggers[token];
         }
     } else {
-        var eventName = eventData;
+        eventName = eventData;
 
         if (events[eventName]){
             delete events[eventName];
         }
     }
-}
+};
 
 var removeAllEvents = function(){
     events = {};
-}
+};
 
 EasyEvents = {
     subscribe: addEvent,
     publish: trigger,
     remove: removeEvent,
     removeAll: removeAllEvents
-}
+};
