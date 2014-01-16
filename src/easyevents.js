@@ -29,11 +29,28 @@ var trigger = function(eventName, data){
 
     if (triggerEvents) {
         for(var i in triggerEvents){
-            var triggerEvent = triggerEvents[i];
-            triggerEvent(eventName, data);
+            if (triggerEvents.hasOwnProperty(i)){
+                var triggerEvent = triggerEvents[i];
+                setTimeout( function(){
+                    triggerEvent(eventName, data);
+                }, 0 );
+            }
         }
     }
 };
+
+var triggerSync = function(eventName, data){
+    var triggerEvents = events[eventName];
+
+    if (triggerEvents) {
+        for(var i in triggerEvents){
+            if (triggerEvents.hasOwnProperty(i)){
+                var triggerEvent = triggerEvents[i];
+                triggerEvent(eventName, data);
+            }
+        }
+    }
+}
 
 var removeEvent = function(eventData){
     var args = eventData.split('::');
@@ -64,6 +81,7 @@ var removeAllEvents = function(){
 EasyEvents = {
     subscribe: addEvent,
     publish: trigger,
+    publishSync: triggerSync,
     remove: removeEvent,
     removeAll: removeAllEvents
 };
