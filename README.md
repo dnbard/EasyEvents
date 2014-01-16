@@ -6,7 +6,8 @@ EasyEvents is free publish/subscribe library for JavaScript.
 Key features
 ==========
 * Dependency free
-* EasyEvents should be able to run everywhere that can execute JavaScript. Browsers, servers, ebook readers, old phones, game consoles.
+* All subscriber calls are asynchronous
+* Working in any browser or environment that support Javascript
 * Easy to use and understand
 * Small, less than 1kb minified
 
@@ -25,6 +26,10 @@ var token = EasyEvents.subscribe(EVENT_TITLE, myFunc);
 
 // publish a message
 EasyEvents.publish(EVENT_TITLE);
+
+// publish a message synchronously
+// use with caution and only if you know why your messages should be sent synchronously
+EasyEvents.publishSync(EVENT_TITLE);
 
 // unsubscribe from further messages by token
 EasyEvents.remove(token);
