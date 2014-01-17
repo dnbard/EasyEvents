@@ -16,7 +16,7 @@ Example
 ```javascript
 // create a function to receive messages
 var myFunc = function(event, data){
-  console.log(new Date() + ' Event with name "' + event + '" triggered');
+  console.log(new Date() + ' Event with name "' + event + '" is triggered');
 };
 
 // subscribe function to message with name 'message-name'
@@ -26,6 +26,11 @@ var token = EasyEvents.subscribe(EVENT_TITLE, myFunc);
 
 // publish a message
 EasyEvents.publish(EVENT_TITLE);
+
+// or publish a message with some data attached to it
+EasyEvents.publish(EVENT_TITLE, {
+  msg: 'Hello, EasyEvents!'
+});
 
 // publish a message synchronously
 // use with caution and only if you know why your messages should be sent synchronously
